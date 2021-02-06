@@ -9,27 +9,32 @@ class FullPost extends Component {
         loadedPost: null
     }
     
-    // Max's solution 
-    // componentDidUpdate () { 
-    //     if (this.props.id) {
-    //             if ( !this.state.LoadedPost || (this.state.loadedPost &&  this.state.loadedPost.id !== this.props.id) ) {
-    //                 axios.get('http://jsonplaceholder.typicode.com/posts/' + this.props.id)
-    //                 .then(response => {
-    //                     this.setState({loadedPost: response.data});
-    //                 }  );
-    //             } 
+    // Lecture's solution 
+     componentDidMount () { 
+         console.log(this.props)
+         if (this.props.match.params.id ) {
+                 if ( !this.state.LoadedPost || (this.state.loadedPost &&  this.state.loadedPost.id !== this.props.id) ) {
+                    // axios.get('http://jsonplaceholder.typicode.com/posts/' + this.props.match.params.id)
+                    axios.get('/posts/' + this.props.match.params.id) 
+                     .then(response => {
+                         this.setState({loadedPost: response.data});
+                     }  );
+                 } 
+         }
+     }
+    
+    
+    // Q&A Solution  
+
+    // componentDidUpdate (prevProps) {
+    //     console.log(this.props)
+    //     if (prevProps.id !== this.props.id) {
+    //         axios.get('/posts/' + this.props.id)
+    //             .then(response => {
+    //                 this.setState({loadedPost: response.data});
+    //             }  );
     //     }
     // }
-    
-    // Q&A Solution 
-    componentDidUpdate (prevProps) {
-        if (prevProps.id !== this.props.id) {
-            axios.get('/posts/' + this.props.id)
-                .then(response => {
-                    this.setState({loadedPost: response.data});
-                }  );
-        }
-    }
 
     deletePostHandler = () => {
         axios.delete('/posts/' + this.props.id)
@@ -44,7 +49,7 @@ class FullPost extends Component {
             post = <p style={{textAlign: 'center'}}>Loading...</p>;
         }
         if (this.state.loadedPost) { 
-            post = (
+            post = ( 
                 <div className="FullPost">
                     <h1>{this.state.loadedPost.title}</h1>
                     <p>{this.state.loadedPost.body}</p>
