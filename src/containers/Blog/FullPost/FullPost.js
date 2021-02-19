@@ -10,19 +10,26 @@ class FullPost extends Component {
     }
     
     // Lecture's solution 
-     componentDidMount () { 
-         console.log(this.props)
-         if (this.props.match.params.id ) {
-                 if ( !this.state.LoadedPost || (this.state.loadedPost &&  this.state.loadedPost.id !== this.props.id) ) {
-                    // axios.get('http://jsonplaceholder.typicode.com/posts/' + this.props.match.params.id)
-                    axios.get('/posts/' + this.props.match.params.id) 
-                     .then(response => {
-                         this.setState({loadedPost: response.data});
-                     }  );
-                 } 
-         }
-     }
-    
+    componentDidMount () { 
+        console.log(this.props);
+        this.loadData();
+    }
+
+    componentDidUpdate () {
+        this.loadData();
+    }
+
+    loadData () {
+        if (this.props.match.params.id ) {
+                if ( !this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id != this.props.match.params.id) ) {   
+                   // axios.get('http://jsonplaceholder.typicode.com/posts/' + this.props.match.params.id)
+                   axios.get('/posts/' + this.props.match.params.id) 
+                    .then(response => {
+                        this.setState({loadedPost: response.data});
+                    }  );
+                } 
+        }
+    }
     
     // Q&A Solution  
 
@@ -37,7 +44,7 @@ class FullPost extends Component {
     // }
 
     deletePostHandler = () => {
-        axios.delete('/posts/' + this.props.id)
+        axios.delete('/posts/' + this.props.match.params.id)
             .then(response => {
                 console.log(response);
             });
@@ -45,7 +52,7 @@ class FullPost extends Component {
 
     render () {
         let post = <p style={{textAlign: 'center'}}>Please select a Post!</p>;
-        if (this.props.id) { // if the id isn't initialized, it's value is null which is treated as false in 'if' check 
+        if (this.props.match.params.id) { // if the id isn't initialized, it's value is null which is treated as false in 'if' check 
             post = <p style={{textAlign: 'center'}}>Loading...</p>;
         }
         if (this.state.loadedPost) { 

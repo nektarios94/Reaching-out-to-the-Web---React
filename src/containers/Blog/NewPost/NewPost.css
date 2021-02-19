@@ -30,13 +30,14 @@
     padding: 10px;
     font: inherit;
     border: 1px solid #fa923f;
-    background-color: transparent;
-    color: #fa923f;
+    background-color: #ee9e5d;
+    color: white;
+    font-weight: bold;
     cursor: pointer;
 }
 
 .NewPost button:hover,
 .NewPost button:active {
     color: white;
-    background-color: #fa923f;
+    background-color: #e9822d;
 }
