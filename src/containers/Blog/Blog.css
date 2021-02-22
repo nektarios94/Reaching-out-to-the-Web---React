@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    text-align: center;
+    text-align: center; 
 }
 
 .Blog li {
@@ -19,6 +19,6 @@
 
 .Blog a:hover,
 .Blog a:active,
-.Blog a.active {
+.Blog a.active { /* '.Blog a.active' makes all links('a' means link in html/css) that use the active class to use this color */
     color: #fa933f;
 }

@@ -13,7 +13,7 @@ class NewPost extends Component {
     }
 
     componentDidMount () {
-        // if unauth => this.props.history.replace('/posts/');
+        // if unauth => this.props.history.replace('/posts/'); // το anauth ειναι μια υποτιθεμενη μεταβλητη
         console.log(this.props);
     }
 
