@@ -40,7 +40,6 @@ class Posts extends Component {
     }
     
     render() {
-        console.log('params.id: ', this.props.match.params.id);
         let posts = <p style={{textAlign: 'center'}}>Something went wrong</p>
         if (!this.state.error) {
             posts = this.state.posts.map( post => {
